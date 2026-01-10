@@ -1,26 +1,72 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+:root{
+  --color-light: #F0F0F0;
+  --color-dark: #1A1A1A;
+  --color-primary: #004D61;
+  --color-secondary: #822659;
+  --color-accent: #3E5641;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Dark theme overrides */
+.dark {
+  --color-light: #1A1A1A;
+  --color-dark: #F0F0F0;
+  --color-primary: #004D61;
+  --color-secondary: #822659;
+  --color-accent: #3E5641;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html, body, #__next {
+  height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-light);
+  color: var(--color-dark);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+/* Utility classes that use variables */
+:root{
+  --transition-fast: 200ms;
+  --transition-default: 300ms;
+  --card-shadow: 0 6px 20px rgba(0,0,0,0.06);
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-light);
+}
+
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+  border: 1px solid rgba(0,0,0,0.06);
+  transition: transform var(--transition-default) ease, box-shadow var(--transition-default) ease, border-color var(--transition-fast) ease;
+  will-change: transform, box-shadow;
+}
+
+.card:focus-within, .card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--card-shadow);
+}
+
+
+/* Simple fade-in on scroll (used with Framer Motion as well) */
+.fade-in {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+/* Responsive container */
+.container {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
