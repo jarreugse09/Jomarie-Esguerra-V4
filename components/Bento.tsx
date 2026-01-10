@@ -1,11 +1,15 @@
-import MotionCard from './MotionCard';
+import MotionCard from "./MotionCard";
 
 export default function Bento() {
   const items = [
-    { label: 'Design', color: 'bg-[var(--color-primary)] text-[var(--color-light)]' },
-    { label: 'Frontend', color: 'bg-[var(--color-secondary)] text-[var(--color-light)]' },
-    { label: 'Backend', color: 'bg-[var(--color-accent)] text-[var(--color-light)]' },
-    { label: 'Tooling', color: 'bg-[var(--color-dark)] text-[var(--color-light)]' },
+    { label: "Design", color: "bg-primary-500 text-white" },
+    { label: "Frontend", color: "bg-secondary-500 text-white" },
+    { label: "Backend", color: "bg-accent-500 text-white" },
+    {
+      label: "Tooling",
+      color:
+        "bg-neutral-800 dark:bg-neutral-200 text-white dark:text-neutral-900",
+    },
   ];
 
   return (

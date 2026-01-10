@@ -1,14 +1,24 @@
-import MotionCard from './MotionCard';
+import MotionCard from "./MotionCard";
 
-export default function Education(){
+export default function Education() {
   const schools = [
-    { school: 'University A', degree: 'B.S. Computer Science', years: '2016 — 2020' },
-    { school: 'High School B', degree: 'High School Diploma', years: '2012 — 2016' }
+    {
+      school: "University A",
+      degree: "B.S. Computer Science",
+      years: "2016 — 2020",
+    },
+    {
+      school: "High School B",
+      degree: "High School Diploma",
+      years: "2012 — 2016",
+    },
   ];
 
   return (
     <section className="mt-8">
-      <h2 className="text-2xl font-semibold mb-4 text-[var(--color-primary)]">Education</h2>
+      <h2 className="text-2xl font-semibold mb-4 text-primary-500">
+        Education
+      </h2>
       <div className="grid md:grid-cols-2 gap-4">
         {schools.map((s) => (
           <MotionCard

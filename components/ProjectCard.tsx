@@ -1,28 +1,54 @@
-'use client';
+"use client";
 
+import { motion } from "framer-motion";
 import Link from "next/link";
-import MotionCard from "./MotionCard";
 
-type Props = {
+type Project = {
   title: string;
-  summary: string;
+  slug: string;
+  description: string;
+  tech?: string[];
 };
 
-export default function ProjectCard({ title, summary }: Props) {
+type Props =
+  | { title: string; summary: string; project?: never }
+  | { project: Project; title?: never; summary?: never };
+
+export default function ProjectCard(props: Props) {
+  const title = props.project ? props.project.title : props.title || "";
+  const summary = props.project
+    ? props.project.description
+    : props.summary || "";
+  const slug = props.project
+    ? props.project.slug
+    : props.title?.replace(/\s+/g, "-").toLowerCase() || "";
+  const tech = props.project?.tech || [];
+
   return (
-    <MotionCard
-      initial={{ opacity: 0, y: 8 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="p-4 rounded-lg border border-black/5"
-      whileHover={{ scale: 1.02, borderColor: 'rgba(0,77,97,0.18)' }}
+    <motion.div
+      whileHover={{ y: -3, boxShadow: "0 10px 15px rgba(0,0,0,0.1)" }}
+      className="p-6 rounded-xl bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 cursor-pointer transition-all"
     >
-      <Link href={`/projects/${title}`} className="block">
-        <h3 className="text-lg font-semibold mb-1">{title}</h3>
-        <p className="mt-1 text-sm text-[var(--color-accent)]">
+      <Link href={`/projects/${slug}`}>
+        <h3 className="text-lg font-semibold mb-2 text-neutral-900 dark:text-neutral-100">
+          {title}
+        </h3>
+        <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-3">
           {summary}
         </p>
+        {tech.length > 0 && (
+          <div className="flex flex-wrap gap-1">
+            {tech.slice(0, 3).map((techItem) => (
+              <span
+                key={techItem}
+                className="text-xs px-2 py-1 bg-neutral-100 dark:bg-neutral-700 rounded"
+              >
+                {techItem}
+              </span>
+            ))}
+          </div>
+        )}
       </Link>
-    </MotionCard>
+    </motion.div>
   );
 }

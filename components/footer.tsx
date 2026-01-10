@@ -1,16 +1,28 @@
-import MotionCard from './MotionCard';
+"use client";
 
 export default function Footer() {
   return (
-    <MotionCard className="w-full border-t mt-16 bg-[var(--color-light)]">
-      <div className="container text-sm text-center text-black/70 py-6">
-        <div className="flex items-center justify-center gap-4 mb-2">
-          <a href="#" aria-label="Twitter" className="hover:underline transition text-[var(--color-primary)]">Twitter</a>
-          <a href="#" aria-label="LinkedIn" className="hover:underline transition text-[var(--color-primary)]">LinkedIn</a>
-          <a href="#" aria-label="Github" className="hover:underline transition text-[var(--color-primary)]">GitHub</a>
+    <footer className="bg-neutral-200 dark:bg-neutral-900 py-8 mt-20">
+      <div className="container mx-auto px-6 md:px-16 text-center text-sm text-neutral-600 dark:text-neutral-400 space-y-4">
+        <p>© 2026 Jomarie Esguerra. All rights reserved.</p>
+        <div className="flex justify-center gap-4">
+          <a
+            href="https://github.com/yourusername"
+            target="_blank"
+            rel="noreferrer"
+          >
+            GitHub
+          </a>
+          <a
+            href="https://linkedin.com/in/yourusername"
+            target="_blank"
+            rel="noreferrer"
+          >
+            LinkedIn
+          </a>
+          <a href="mailto:your.email@example.com">Email</a>
         </div>
-        <div>© {new Date().getFullYear()} Jomarie Esguerra. All rights reserved.</div>
       </div>
-    </MotionCard>
+    </footer>
   );
 }
