@@ -1,165 +1,294 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
+import { useRef, useState, useEffect } from "react";
 
 interface Project {
   id: number;
   title: string;
   description: string;
   techStack: string[];
-  liveUrl?: string;
-  githubUrl?: string;
-  impact: string;
+  imageUrl: string;
+  githubUrl: string;
+  liveUrl: string;
 }
 
 const projects: Project[] = [
   {
     id: 1,
-    title: "E-Commerce Platform",
-    description:
-      "Full-stack online store with payment integration, inventory management, and real-time order tracking.",
-    techStack: ["Next.js", "TypeScript", "Stripe", "PostgreSQL"],
-    liveUrl: "#",
-    githubUrl: "#",
-    impact: "Increased sales by 40%",
+    title: "Mini Social Media RBAC",
+    description: "A lightweight social media platform",
+    techStack: ["Node.js", "Express", "MongoDB", "JavaScript", "CSS"],
+    imageUrl: "https://picsum.photos/400/300?random=1",
+    githubUrl: "",
+    liveUrl: "https://mini-social-media-6ibh.onrender.com/",
   },
   {
     id: 2,
-    title: "Task Management Dashboard",
-    description:
-      "Collaborative project management tool with real-time updates, team chat, and analytics.",
-    techStack: ["React", "Node.js", "Socket.io", "MongoDB"],
-    liveUrl: "#",
-    githubUrl: "#",
-    impact: "Used by 500+ teams",
+    title: "Task Dashboard",
+    description: "Collaborative project management tool.",
+    techStack: ["React", "MongoDB"],
+    imageUrl: "https://picsum.photos/400/300?random=2",
+    githubUrl: "",
+    liveUrl: "",
   },
   {
     id: 3,
-    title: "AI Content Generator",
-    description:
-      "AI-powered tool that generates marketing copy, blog posts, and social media content.",
-    techStack: ["Next.js", "OpenAI API", "Tailwind", "Vercel"],
-    liveUrl: "#",
-    githubUrl: "#",
-    impact: "10k+ generations/month",
+    title: "AI Generator",
+    description: "AI-powered marketing copy tool.",
+    techStack: ["OpenAI", "Tailwind"],
+    imageUrl: "https://picsum.photos/400/300?random=3",
+    githubUrl: "",
+    liveUrl: "",
   },
   {
     id: 4,
     title: "Portfolio CMS",
-    description:
-      "Headless CMS for developers to manage portfolios with markdown support and custom themes.",
-    techStack: ["Next.js", "MDX", "Prisma", "PostgreSQL"],
-    githubUrl: "#",
-    impact: "Open source • 200+ stars",
+    description: "Headless CMS for developers.",
+    techStack: ["Prisma", "PostgreSQL"],
+    imageUrl: "https://picsum.photos/400/300?random=4",
+    githubUrl: "",
+    liveUrl: "",
   },
 ];
 
 export default function Projects() {
-  return (
-    <section id="projects" className="relative py-20 px-4 md:px-8">
-      <div className="container max-w-6xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="section-title">Projects</div>
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
-          <div className="grid md:grid-cols-2 gap-6">
-            {projects.map((project, index) => (
+  const handleScroll = () => {
+    if (!containerRef.current) return;
+    const { scrollLeft, clientWidth } = containerRef.current;
+    const center = scrollLeft + clientWidth / 2;
+    const items = containerRef.current.querySelectorAll(".project-card");
+
+    let closestIndex = 0;
+    let minDistance = Infinity;
+
+    items.forEach((item, index) => {
+      const rect = item.getBoundingClientRect();
+      const itemCenter =
+        rect.left +
+        rect.width / 2 +
+        scrollLeft -
+        containerRef.current!.getBoundingClientRect().left;
+      const distance = Math.abs(center - itemCenter);
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestIndex = index;
+      }
+    });
+    setActiveIndex(closestIndex % projects.length);
+  };
+
+  const scroll = (direction: "left" | "right") => {
+    if (containerRef.current) {
+      const cardWidth = 640;
+      containerRef.current.scrollBy({
+        left: direction === "left" ? -cardWidth : cardWidth,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+    const handleInfinite = () => {
+      const { scrollLeft, scrollWidth, clientWidth } = container;
+      if (scrollLeft + clientWidth >= scrollWidth - 10)
+        container.scrollLeft = clientWidth;
+      if (scrollLeft <= 5) container.scrollLeft = scrollWidth / 3;
+    };
+    container.addEventListener("scroll", handleInfinite);
+    container.scrollLeft = container.clientWidth;
+    return () => container.removeEventListener("scroll", handleInfinite);
+  }, []);
+
+  const infiniteProjects = [...projects, ...projects, ...projects];
+
+  return (
+    <section
+      id="projects"
+      className="relative py-20 overflow-hidden bg-[var(--bg)]"
+    >
+      <div className="container max-w-[95vw] mx-auto px-4">
+        <div className="section-title mb-12 uppercase tracking-widest text-[var(--accent)] opacity-80">
+          Selected_Works
+        </div>
+
+        <div className="relative group/carousel">
+          {/* Edge Fades */}
+          <div className="absolute left-0 top-0 bottom-0 w-48 z-20 bg-gradient-to-r from-[var(--bg)] to-transparent pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-48 z-20 bg-gradient-to-l from-[var(--bg)] to-transparent pointer-events-none" />
+
+          {/* Nav Buttons */}
+          <button
+            onClick={() => scroll("left")}
+            className="absolute left-8 top-1/2 -translate-y-1/2 z-30 p-5 rounded-full bg-[var(--bg)] border border-[var(--border)] text-[var(--accent)] hover:bg-[var(--accent)] hover:text-[var(--bg)] transition-all opacity-0 group-hover/carousel:opacity-100 shadow-[0_0_20px_rgba(var(--accent-rgb),0.3)]"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
+          <button
+            onClick={() => scroll("right")}
+            className="absolute right-8 top-1/2 -translate-y-1/2 z-30 p-5 rounded-full bg-[var(--bg)] border border-[var(--border)] text-[var(--accent)] hover:bg-[var(--accent)] hover:text-[var(--bg)] transition-all opacity-0 group-hover/carousel:opacity-100 shadow-[0_0_20px_rgba(var(--accent-rgb),0.3)]"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </button>
+
+          <div
+            ref={containerRef}
+            onScroll={handleScroll}
+            className="flex gap-6 overflow-x-auto py-10 no-scrollbar snap-x snap-mandatory"
+          >
+            {infiniteProjects.map((project, index) => (
               <motion.div
-                key={project.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -4 }}
-                className="crt-card group cursor-pointer"
+                key={`${project.id}-${index}`}
+                whileHover={{ y: -10 }}
+                className="project-card min-w-[85vw] md:min-w-[600px] snap-center crt-card group flex flex-col h-[520px] overflow-hidden flex-shrink-0 !p-0 transition-all duration-300 hover:shadow-[0_0_30px_rgba(var(--accent-rgb),0.2)]"
               >
-                {/* Project Header */}
-                <div className="mb-4">
-                  <div className="flex items-start justify-between mb-2">
-                    <h3 className="text-xl font-bold text-[var(--fg)] group-hover:text-[var(--accent)] transition-colors">
-                      {project.title}
-                    </h3>
-                    <div className="flex gap-2">
-                      {project.liveUrl && (
-                        <a
-                          href={project.liveUrl}
-                          onClick={(e) => e.stopPropagation()}
-                          className="w-8 h-8 flex items-center justify-center rounded border border-[var(--border)] text-[var(--accent)] hover:border-[var(--accent)] hover:bg-[var(--accent)] hover:text-[var(--bg)] transition-all"
-                          aria-label="View live demo"
+                {/* 1. IMAGE: Perfectly Flush */}
+                <div className="w-full h-[75%] overflow-hidden relative m-0 p-0">
+                  <img
+                    src={project.imageUrl}
+                    className="w-full h-full object-cover block scale-110 group-hover:scale-100 transition-transform duration-700"
+                    alt={project.title}
+                  />
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
+                </div>
+
+                {/* 2. CONTENT: Inset */}
+                <div className="flex-1 p-8 bg-[var(--bg-secondary)] border-t border-[var(--border)] flex flex-col justify-between">
+                  {/* TOP SECTION: Title, Buttons, Desc */}
+                  <div className="flex flex-col">
+                    <div className="flex justify-between items-start mb-3">
+                      {/* Title */}
+                      <h3 className="mt-3! ml-5! text-4xl font-bold text-[var(--fg)] tracking-tight group-hover:text-[var(--accent)] transition-colors">
+                        {project.title}
+                      </h3>
+
+                      {/* CIRCULAR ACTION BUTTONS (Aligned with Title) */}
+                      <div className="flex gap-3 mt-3 mr-5!">
+                        {/* GitHub Button */}
+                        <motion.a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          whileHover={{ scale: 1.1, rotate: 10 }}
+                          whileTap={{ scale: 0.9 }}
+                          className="mt-5! w-11 h-11 flex items-center justify-center rounded-full border border-[var(--border)] text-[var(--fg)] bg-[var(--bg)] hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors z-10"
+                          title="View Source"
                         >
                           <svg
-                            width="14"
-                            height="14"
+                            className="w-5 h-5"
+                            fill="currentColor"
                             viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
+                            aria-hidden="true"
                           >
-                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                            <polyline points="15 3 21 3 21 9" />
-                            <line x1="10" y1="14" x2="21" y2="3" />
+                            <path
+                              fillRule="evenodd"
+                              d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                              clipRule="evenodd"
+                            />
                           </svg>
-                        </a>
-                      )}
-                      {project.githubUrl && (
-                        <a
-                          href={project.githubUrl}
-                          onClick={(e) => e.stopPropagation()}
-                          className="w-8 h-8 flex items-center justify-center rounded border border-[var(--border)] text-[var(--accent)] hover:border-[var(--accent)] hover:bg-[var(--accent)] hover:text-[var(--bg)] transition-all"
-                          aria-label="View on GitHub"
-                        >
-                          <span className="text-xs font-bold">GH</span>
-                        </a>
-                      )}
+                        </motion.a>
+
+                        {/* Live Button (Conditional) */}
+                        {project.liveUrl && (
+                          <motion.a
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            whileHover={{ scale: 1.1, rotate: -10 }}
+                            whileTap={{ scale: 0.9 }}
+                            className="mt-5! w-11 h-11 flex items-center justify-center rounded-full bg-[var(--accent)] text-[var(--bg)] shadow-[0_0_15px_rgba(var(--accent-rgb),0.5)] z-10"
+                            title="Live Demo"
+                          >
+                            <svg
+                              className="w-5 h-5"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                              />
+                            </svg>
+                          </motion.a>
+                        )}
+                      </div>
                     </div>
+
+                    {/* Description */}
+                    <p className="ml-5! text-[var(--fg-muted)] text-lg mb-6 line-clamp-2 leading-relaxed">
+                      {project.description}
+                    </p>
                   </div>
-                  <p className="text-sm text-[var(--fg-muted)] leading-relaxed">
-                    {project.description}
-                  </p>
-                </div>
 
-                {/* Tech Stack */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.techStack.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-2 py-1 text-xs terminal-text border border-[var(--border)] rounded text-[var(--accent)] bg-[var(--bg)]"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Impact Badge */}
-                <div className="pt-4 border-t border-[var(--border)]">
-                  <div className="terminal-text text-xs text-[var(--accent)] flex items-center gap-2">
-                    <span className="inline-block w-1.5 h-1.5 bg-[var(--accent)] rounded-full" />
-                    {project.impact}
+                  {/* BOTTOM SECTION: Tech Stack Only */}
+                  <div className="ml-5! mb-3! flex flex-wrap gap-3">
+                    {project.techStack.map((tech) => (
+                      <span
+                        key={tech}
+                        className=" py-1! px-1! text-xs border border-[var(--border)] rounded-sm text-[var(--accent)] uppercase tracking-tighter bg-[var(--bg)]/50"
+                      >
+                        {tech}
+                      </span>
+                    ))}
                   </div>
                 </div>
               </motion.div>
             ))}
           </div>
+        </div>
 
-          {/* View All Projects CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.5 }}
-            className="mt-12 text-center"
-          >
-            <Link href="/projects" className="crt-button inline-block">
-              View All Projects
-            </Link>
-          </motion.div>
-        </motion.div>
+        {/* COUNTER UI */}
+        <div className="mt-12 flex flex-col items-center gap-6">
+          <div className="flex gap-3">
+            {projects.map((_, i) => (
+              <div
+                key={i}
+                className={`h-1.5 transition-all duration-500 rounded-full ${
+                  i === activeIndex
+                    ? "w-12 bg-[var(--accent)]"
+                    : "w-3 bg-[var(--border)]"
+                }`}
+              />
+            ))}
+          </div>
+          <div className="terminal-text text-xl font-bold text-[var(--accent)]">
+            <span className="opacity-40">PROJECT_NO._</span>
+            {activeIndex + 1} / {projects.length}
+          </div>
+        </div>
       </div>
+
+      <style jsx>{`
+        .no-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
     </section>
   );
 }

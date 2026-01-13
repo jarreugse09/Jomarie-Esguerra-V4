@@ -28,9 +28,9 @@ export default function Home() {
         <Projects />
       </section>
 
-      <section>
+      {/* <section>
         <Experience />
-      </section>
+      </section> */}
 
       <section>
         <CTA />
