@@ -116,7 +116,6 @@ export default function Projects() {
         <div className="section-title mb-12 uppercase tracking-widest text-[var(--accent)] opacity-80">
           Selected_Works
         </div>
-
         <div className="relative group/carousel">
           {/* Edge Fades */}
           <div className="absolute left-0 top-0 bottom-0 w-48 z-20 bg-gradient-to-r from-[var(--bg)] to-transparent pointer-events-none" />
@@ -262,8 +261,7 @@ export default function Projects() {
             ))}
           </div>
         </div>
-
-        {/* COUNTER UI */}
+        <div className="h-6" /> {/* COUNTER UI */}
         <div className="mt-12 flex flex-col items-center gap-6">
           <div className="flex gap-3">
             {projects.map((_, i) => (
