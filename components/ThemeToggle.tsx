@@ -35,24 +35,39 @@ export default function ThemeToggle() {
 
   const themes = [
     { id: "green" as Theme, label: "Phosphor", color: "#4ade80" },
-    { id: "amber" as Theme, label: "Amber", color: "#fbbf24" },
     { id: "cyan" as Theme, label: "Cyan", color: "#22d3ee" },
   ];
 
+  const activeColor = themes.find((t) => t.id === theme)?.color;
+
   return (
     <div className="relative">
+      {/* Toggle Button */}
       <motion.button
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
+        whileHover={{ scale: 1.06 }}
+        whileTap={{ scale: 0.96 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-2 rounded-md border border-[var(--border)] bg-[var(--bg-elevated)] text-[var(--accent)] hover:border-[var(--border-strong)] transition-colors terminal-text text-sm"
+        className="
+          flex items-center gap-3
+          px-3! py-1!
+          rounded-lg
+          border border-[var(--border)]
+          bg-[var(--bg-elevated)]/90
+          backdrop-blur
+          text-[var(--accent)]
+          hover:border-[var(--accent)]
+          transition-colors
+          terminal-text
+          text-base
+          shadow-[0_0_20px_rgba(0,0,0,0.6)]
+        "
         aria-label="Toggle theme"
       >
         <div
-          className="w-3 h-3 rounded-full"
+          className="w-4 h-4 rounded-full"
           style={{
-            backgroundColor: themes.find((t) => t.id === theme)?.color,
-            boxShadow: `0 0 10px ${themes.find((t) => t.id === theme)?.color}`,
+            backgroundColor: activeColor,
+            boxShadow: `0 0 14px ${activeColor}`,
           }}
         />
         <span className="hidden sm:inline">Theme</span>
@@ -61,6 +76,7 @@ export default function ThemeToggle() {
       <AnimatePresence>
         {isOpen && (
           <>
+            {/* Click-away backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -68,37 +84,55 @@ export default function ThemeToggle() {
               className="fixed inset-0 z-40"
               onClick={() => setIsOpen(false)}
             />
+
+            {/* Dropdown */}
             <motion.div
-              initial={{ opacity: 0, y: -10 }}
+              initial={{ opacity: 0, y: -12 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
+              exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.2 }}
-              className="absolute right-0 mt-2 w-40 rounded-md border border-[var(--border)] bg-[var(--bg-elevated)] shadow-lg z-50 overflow-hidden"
-              style={{ boxShadow: "0 0 20px var(--glow)" }}
+              className="
+                absolute right-0 mt-3 w-48
+                rounded-lg
+                border border-[var(--border)]
+                bg-[var(--bg-elevated)]/95
+                backdrop-blur
+                shadow-[0_0_30px_var(--glow)]
+                z-50
+                overflow-hidden
+              "
             >
               {themes.map((t) => (
                 <button
                   key={t.id}
                   onClick={() => handleThemeChange(t.id)}
-                  className={`w-full flex items-center gap-3 px-4 py-3 transition-colors terminal-text text-sm ${
-                    theme === t.id
-                      ? "bg-[var(--accent)] text-[var(--bg)]"
-                      : "text-[var(--fg-muted)] hover:bg-[var(--bg)]"
-                  }`}
+                  className={`
+                    w-full flex items-center gap-4
+                    px-5 py-3
+                    terminal-text
+                    text-base
+                    transition-colors
+                    ${
+                      theme === t.id
+                        ? "bg-[var(--accent)] text-[var(--bg)]"
+                        : "text-[var(--fg-muted)] hover:bg-[var(--bg)]"
+                    }
+                  `}
                 >
                   <div
-                    className="w-3 h-3 rounded-full"
+                    className="w-4 h-4 rounded-full"
                     style={{
                       backgroundColor: t.color,
-                      boxShadow: `0 0 8px ${t.color}`,
+                      boxShadow: `0 0 12px ${t.color}`,
                     }}
                   />
                   <span>{t.label}</span>
+
                   {theme === t.id && (
                     <motion.span
-                      initial={{ opacity: 0, scale: 0.5 }}
+                      initial={{ opacity: 0, scale: 0.6 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      className="ml-auto"
+                      className="ml-auto text-lg"
                     >
                       ✓
                     </motion.span>

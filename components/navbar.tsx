@@ -8,50 +8,38 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[var(--bg)]/90 backdrop-blur-sm border-b border-[var(--border)]">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-[var(--bg)]/90 backdrop-blur-md border-b border-[var(--border)]">
       <div className="container">
-        <div className="flex items-center justify-between py-4">
+        <div className="flex items-center justify-between py-6 md:py-7">
+          {/* Logo */}
           <div className="flex items-center gap-4">
             <Link
               href="/"
-              className="terminal-text font-bold text-lg text-[var(--accent)] hover:text-[var(--accent-bright)] transition-colors"
+              className="terminal-text font-bold text-xl md:text-2xl
+                         text-[var(--accent)]
+                         hover:text-[var(--accent-bright)]
+                         transition-colors"
             >
               &gt; Jomarie
             </Link>
           </div>
 
-          <div className="hidden md:flex items-center gap-6">
-            <Link
-              href="/"
-              className="text-sm terminal-text text-[var(--fg-muted)] hover:text-[var(--accent)] transition-colors"
-            >
-              Home
-            </Link>
-            <Link
-              href="/#projects"
-              className="text-sm terminal-text text-[var(--fg-muted)] hover:text-[var(--accent)] transition-colors"
-            >
-              Projects
-            </Link>
-            <Link
-              href="/contact"
-              className="text-sm terminal-text text-[var(--fg-muted)] hover:text-[var(--accent)] transition-colors"
-            >
-              Contact
-            </Link>
+          {/* Desktop */}
+          <div className="hidden md:flex items-center gap-8 px-3! py-3!">
             <ThemeToggle />
           </div>
 
-          <div className="md:hidden flex items-center gap-2">
+          {/* Mobile */}
+          <div className="md:hidden flex items-center gap-4">
             <ThemeToggle />
             <button
               aria-label="Toggle menu"
               onClick={() => setOpen(!open)}
-              className="w-8 h-8 flex flex-col justify-center items-center"
+              className="w-10 h-10 flex flex-col justify-center items-center"
             >
-              <div className="w-5 h-0.5 bg-[var(--accent)] mb-1" />
-              <div className="w-5 h-0.5 bg-[var(--accent)] mb-1" />
-              <div className="w-5 h-0.5 bg-[var(--accent)]" />
+              <span className="w-6 h-0.5 bg-[var(--accent)] mb-1.5" />
+              <span className="w-6 h-0.5 bg-[var(--accent)] mb-1.5" />
+              <span className="w-6 h-0.5 bg-[var(--accent)]" />
             </button>
           </div>
         </div>
@@ -59,25 +47,25 @@ export default function Navbar() {
         {/* Mobile Menu */}
         {open && (
           <div className="md:hidden border-t border-[var(--border)] bg-[var(--bg)]">
-            <div className="flex flex-col p-4 gap-3">
+            <div className="flex flex-col p-6 gap-4">
               <Link
                 href="/"
                 onClick={() => setOpen(false)}
-                className="terminal-text text-[var(--fg-muted)] hover:text-[var(--accent)] transition-colors"
+                className="terminal-text text-base text-[var(--fg-muted)] hover:text-[var(--accent)] transition-colors"
               >
                 Home
               </Link>
               <Link
                 href="/#projects"
                 onClick={() => setOpen(false)}
-                className="terminal-text text-[var(--fg-muted)] hover:text-[var(--accent)] transition-colors"
+                className="terminal-text text-base text-[var(--fg-muted)] hover:text-[var(--accent)] transition-colors"
               >
                 Projects
               </Link>
               <Link
                 href="/contact"
                 onClick={() => setOpen(false)}
-                className="terminal-text text-[var(--fg-muted)] hover:text-[var(--accent)] transition-colors"
+                className="terminal-text text-base text-[var(--fg-muted)] hover:text-[var(--accent)] transition-colors"
               >
                 Contact
               </Link>

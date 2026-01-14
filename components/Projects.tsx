@@ -124,11 +124,11 @@ export default function Projects() {
           {/* Nav Buttons */}
           <button
             onClick={() => scroll("left")}
-            className="absolute left-8 top-1/2 -translate-y-1/2 z-30 p-5 rounded-full bg-[var(--bg)] border border-[var(--border)] text-[var(--accent)] hover:bg-[var(--accent)] hover:text-[var(--bg)] transition-all opacity-0 group-hover/carousel:opacity-100 shadow-[0_0_20px_rgba(var(--accent-rgb),0.3)]"
+            className="absolute left-8 top-1/2 -translate-y-1/2 z-30 p-5 rounded-full bg-[var(--bg)] border border-[var(--border)] text-[var(--accent)] hover:bg-[var(--accent)] hover:text-[var(--bg)] transition-all opacity-100 group-hover/carousel:opacity-100 shadow-[0_0_20px_rgba(var(--accent-rgb),0.3)]"
           >
             <svg
-              width="24"
-              height="24"
+              width="34"
+              height="34"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -139,11 +139,11 @@ export default function Projects() {
           </button>
           <button
             onClick={() => scroll("right")}
-            className="absolute right-8 top-1/2 -translate-y-1/2 z-30 p-5 rounded-full bg-[var(--bg)] border border-[var(--border)] text-[var(--accent)] hover:bg-[var(--accent)] hover:text-[var(--bg)] transition-all opacity-0 group-hover/carousel:opacity-100 shadow-[0_0_20px_rgba(var(--accent-rgb),0.3)]"
+            className="absolute right-8 top-1/2 -translate-y-1/2 z-30 p-5 rounded-full bg-[var(--bg)] border border-[var(--border)] text-[var(--accent)] hover:bg-[var(--accent)] hover:text-[var(--bg)] transition-all opacity-100 group-hover/carousel:opacity-100 shadow-[0_0_20px_rgba(var(--accent-rgb),0.3)]"
           >
             <svg
-              width="24"
-              height="24"
+              width="34"
+              height="34"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -162,7 +162,7 @@ export default function Projects() {
               <motion.div
                 key={`${project.id}-${index}`}
                 whileHover={{ y: -10 }}
-                className="project-card min-w-[85vw] md:min-w-[600px] snap-center crt-card group flex flex-col h-[520px] overflow-hidden flex-shrink-0 !p-0 transition-all duration-300 hover:shadow-[0_0_30px_rgba(var(--accent-rgb),0.2)]"
+                className="project-card min-w-[85vw] md:min-w-[400px] snap-center crt-card group flex flex-col h-[450px] overflow-hidden flex-shrink-0 !p-0 transition-all duration-300 hover:shadow-[0_0_30px_rgba(var(--accent-rgb),0.2)]"
               >
                 {/* 1. IMAGE: Perfectly Flush */}
                 <div className="w-full h-[75%] overflow-hidden relative m-0 p-0">

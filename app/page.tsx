@@ -7,34 +7,72 @@ import Experience from "../components/Experience";
 import CTA from "../components/CTA";
 import Footer from "../components/footer";
 import GradualBlur from "../components/online-comp/GradualBlur";
+import Docker from "../components/online-comp/Docker";
+import { useRouter } from "next/navigation";
+import { VscHome, VscAccount, VscTools, VscArchive } from "react-icons/vsc";
 
 export default function Home() {
+  const router = useRouter();
+
+  const dockItems = [
+    {
+      icon: <VscHome />,
+      label: "Home",
+      onClick: () => window.scrollTo({ top: 0, behavior: "smooth" }),
+    },
+    {
+      icon: <VscAccount />,
+      label: "About",
+      onClick: () =>
+        document
+          .getElementById("about")
+          ?.scrollIntoView({ behavior: "smooth", block: "start" }),
+    },
+    {
+      icon: <VscTools />,
+      label: "Skills",
+      onClick: () =>
+        document.getElementById("skills")?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        }),
+    },
+    {
+      icon: <VscArchive />,
+      label: "Projects",
+      onClick: () =>
+        document
+          .getElementById("projects")
+          ?.scrollIntoView({ behavior: "smooth", block: "start" }),
+    },
+  ];
+
   return (
-    /* Ensure 'h-full' is NOT used here if you want natural scrolling. 
-       'min-h-screen' is fine. Remove any 'overflow-y-auto' from this tag.
-    */
     <main className="relative min-h-screen bg-black overflow-x-hidden">
-      {/* This is your primary content. 
-         Make sure no parent of this div has a fixed height (like h-screen or h-[500px]).
-      */}
-      <div className="flex flex-col gap-y-16 pb-24">
+      <div className="flex flex-col gap-y-16 pb-32">
         <Hero />
-        <section id="about">
+        <section id="about" className="scroll-mt-38">
           <About />
         </section>
-        <section id="skills">
+        <section id="skills" className="scroll-mt-38">
           <Skills />
         </section>
-        <section id="projects">
+
+        <section id="projects" className="scroll-mt-20">
           <Projects />
         </section>
-        <section id="cta">
+        <section id="cta" className="scroll-mt-38">
           <CTA />
         </section>
         <Footer />
       </div>
 
-      {/* GradualBlur stays FIXED to the viewport, it doesn't affect scrolling */}
+      {/* Bottom Dock */}
+      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60]">
+        <Docker items={dockItems} panelHeight={60} baseItemSize={40} />
+      </div>
+
+      {/* Bottom Blur */}
       <div className="fixed bottom-0 left-0 right-0 z-50 pointer-events-none h-[12rem]">
         <GradualBlur
           target="parent"
