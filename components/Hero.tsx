@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import dynamic from "next/dynamic";
+import Shuffle from "./online-comp/Shuffle";
 
 const FaultyTerminal = dynamic(() => import("./online-comp/FaultyTerminal"), {
   ssr: false,
@@ -45,15 +46,26 @@ export default function Hero() {
             ></motion.div>
             {/* Main Name */}
             <div>
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.6 }}
-                className="text-5xl md:text-6xl lg:text-9xl font-bold leading-tight mb-4"
-              >
-                <span className="text-[var(--fg)]">Jomarie</span>
+              <motion.h1 className="text-5xl md:text-6xl lg:text-9xl font-bold leading-[0.65] tracking-tighter mb-4">
+                <Shuffle
+                  text="Jomarie"
+                  shuffleTimes={3}
+                  shuffleDirection="down"
+                  ease="back.out(1.1)"
+                  loopDelay={2}
+                  // Pass the sizing classes here
+                  className="text-5xl md:text-6xl lg:text-9xl text-[var(--fg)]"
+                />
                 <br />
-                <span className="text-[var(--accent)] glow-text">Esguerra</span>
+                <Shuffle
+                  text="Esguerra"
+                  shuffleTimes={3}
+                  shuffleDirection="down"
+                  ease="back.out(1.1)"
+                  loopDelay={2}
+                  // Pass the sizing classes and glow here
+                  className=" text-5xl md:text-6xl lg:text-9xl text-[var(--accent)] glow-text"
+                />
               </motion.h1>
 
               <motion.div
@@ -63,7 +75,7 @@ export default function Hero() {
                 className="terminal-text text-lg md:text-xl text-[var(--accent)] mb-2"
               >
                 {" "}
-                <div className="h-6" /> &gt; Software Engineer
+                <div className="h-4" /> &gt; Software Engineer
               </motion.div>
             </div>
             {/* Value Proposition */}
@@ -82,11 +94,11 @@ export default function Hero() {
               transition={{ delay: 0.8 }}
               className="flex items-center gap-6 pt-6"
             >
-              <span className="terminal-text text-[10px] text-[var(--fg-muted)] uppercase tracking-[0.3em]">
-                Connect_System
+              <span className="terminal-text text-[20px] text-[var(--fg-muted)] uppercase tracking-[0.3em]">
+                Connect_
               </span>
 
-              <div className="flex gap-4">
+              <div className="flex gap-6">
                 {[
                   {
                     name: "github",
@@ -126,7 +138,7 @@ export default function Hero() {
                     aria-label={social.name}
                   >
                     <svg
-                      className="w-5 h-5 fill-current"
+                      className="w-8 h-8 fill-current"
                       role="img"
                       viewBox="0 0 24 24"
                       xmlns="http://www.w3.org/2000/svg"

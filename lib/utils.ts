@@ -1,9 +1,6 @@
-import { projects, type Project } from "../data/projects";
+import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
 
-export function getProjectBySlug(slug: string): Project | undefined {
-  return projects.find((p) => p.slug === slug);
-}
-
-export function getAllProjects() {
-  return projects;
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
 }
