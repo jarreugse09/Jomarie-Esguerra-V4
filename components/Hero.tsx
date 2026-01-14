@@ -2,8 +2,12 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import FaultyTerminal from "./background/FaultyTerminal"; // Ensure the path is correct
+import dynamic from "next/dynamic";
 
+const FaultyTerminal = dynamic(() => import("./online-comp/FaultyTerminal"), {
+  ssr: false,
+  loading: () => <div className="absolute inset-0 bg-black" />,
+});
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center px-4 md:px-8 py-20 overflow-hidden bg-black">

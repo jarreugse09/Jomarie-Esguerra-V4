@@ -32,7 +32,8 @@ export default function Footer() {
               </span>
             </div>
           </motion.div>
-        </div>
+        </div>{" "}
+        <div className="h-24" />
       </div>
     </footer>
   );

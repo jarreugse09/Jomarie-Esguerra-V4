@@ -262,7 +262,8 @@ export default function FaultyTerminal({
   tint = "#ffffff",
   mouseReact = true,
   mouseStrength = 0.2,
-  dpr = Math.min(window.devicePixelRatio || 1, 2),
+  // Use a fallback of 1 for the server
+  dpr = 1,
   pageLoadAnimation = true,
   brightness = 1,
   className,
@@ -299,7 +300,13 @@ export default function FaultyTerminal({
     const ctn = containerRef.current;
     if (!ctn) return;
 
-    const renderer = new Renderer({ dpr });
+    // Detect real DPR on the client side
+    const activeDpr =
+      typeof window !== "undefined"
+        ? Math.min(window.devicePixelRatio || 1, 2)
+        : dpr;
+
+    const renderer = new Renderer({ dpr: activeDpr });
     rendererRef.current = renderer;
     const gl = renderer.gl;
     gl.clearColor(0, 0, 0, 1);
