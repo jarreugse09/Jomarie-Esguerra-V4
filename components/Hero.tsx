@@ -151,7 +151,7 @@ export default function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* RIGHT SIDE - CRT Profile Image */}
+          {/* RIGHT SIDE – CRT TV Profile */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -159,57 +159,46 @@ export default function Hero() {
             className="flex justify-center lg:justify-end"
           >
             <div className="relative">
-              {/* Rotating border effect */}
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="absolute -inset-4 rounded-2xl opacity-50"
-                style={{
-                  background: `conic-gradient(from 0deg, transparent, var(--accent), transparent)`,
-                  filter: "blur(20px)",
-                }}
-              />
-
-              {/* Main CRT Screen Container */}
-              <div className="relative crt-screen p-4 w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96">
-                {/* Image Container */}
-                <div className="relative w-full h-full rounded-lg overflow-hidden border-2 border-[var(--border-strong)]">
+              {/* CRT Bezel */}
+              <div className="crt-bezel w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 p-4">
+                {/* CRT Screen */}
+                <div className="relative crt-screen overflow-hidden rounded-lg">
+                  {/* Image */}
                   <Image
                     src="/joms.jpg"
                     alt="Jomarie Esguerra"
                     fill
-                    className="object-cover"
                     priority
+                    className="object-cover crt-image"
                   />
 
-                  {/* Subtle scan effect overlay */}
+                  {/* Scanlines */}
+                  <div className="absolute inset-0 crt-scanlines pointer-events-none" />
+
+                  {/* Moving scan glow */}
                   <motion.div
-                    animate={{ y: ["0%", "100%"] }}
+                    animate={{ y: ["-20%", "120%"] }}
                     transition={{
                       duration: 3,
                       repeat: Infinity,
                       ease: "linear",
                     }}
-                    className="absolute inset-0 w-full h-1/3 bg-gradient-to-b from-transparent via-[var(--accent)] to-transparent opacity-10"
-                    style={{ filter: "blur(10px)" }}
+                    className="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--accent)] to-transparent opacity-10 blur-md"
                   />
 
-                  {/* Corner accents */}
-                  <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-[var(--accent)]" />
-                  <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-[var(--accent)]" />
-                  <div className="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-[var(--accent)]" />
-                  <div className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-[var(--accent)]" />
+                  {/* CRT vignette */}
+                  <div className="absolute inset-0 crt-vignette pointer-events-none" />
                 </div>
 
-                {/* Status indicator */}
+                {/* Status */}
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 1 }}
-                  className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-[var(--bg-elevated)] px-4 py-2 rounded-full border border-[var(--border)] flex items-center gap-2"
+                  className="absolute -bottom-3 left-1/9 -translate-x-1/2 bg-black/80 px-4 py-1 rounded-full border border-[var(--accent)] flex items-center gap-2"
                 >
-                  <span className="w-2 h-2 bg-[var(--accent)] rounded-full animate-pulse" />
-                  <span className="terminal-text text-xs text-[var(--accent)]">
+                  <span className="ml-2! w-2 h-2 bg-[var(--accent)] rounded-full animate-pulse" />
+                  <span className="mx-2! my-2! terminal-text text-xs text-[var(--accent)]">
                     ONLINE
                   </span>
                 </motion.div>
