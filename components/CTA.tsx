@@ -30,7 +30,7 @@ export default function CTA() {
               A much more interactive place.
             </span>
           </h2>
-          <div className="h-6" /> <div className="h-6" />{" "}
+          <div className="h-6" />{" "}
           <span className="terminal-text text-[var(--accent)] text-xs md:text-sm font-bold tracking-[0.3em] uppercase mb-4 opacity-60">
             Click to reach out!
           </span>
@@ -45,7 +45,7 @@ export default function CTA() {
               className="relative py-2 px-4"
             >
               <span
-                className="text-4xl md:text-6xl lg:text-4xl text-[var(--fg)] transition-colors duration-300 italic select-none"
+                className="text-4xl md:text-6xl lg:text-3xl text-[var(--fg)] transition-colors duration-300 italic select-none"
                 style={{
                   fontFamily: "'Playfair Display', sans-serif",
                   fontStyle: "italic",

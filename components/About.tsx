@@ -90,36 +90,34 @@ export default function About() {
             >
               <p className="text-[var(--fg)] font-semibold text-xl leading-snug">
                 Learn more about me!
+                <div className="h-2" /> (Personal Life)
               </p>
 
               <p className="text-[var(--fg-muted)] leading-relaxed"></p>
-
+              <div className="h-2" />
               <div className="pt-4 flex flex-wrap gap-2">
-                {["Reading", "Watching", "Drawing", "Building", "Leading"].map(
-                  (trait, index) => (
-                    <motion.span
-                      key={trait}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.3 + index * 0.1 }}
-                      className="inline-flex items-center
-    px-5! py-2!
-    border border-[var(--border)]
-    rounded
-    text-xs
-    terminal-text
-    text-[var(--accent)]
-    uppercase
-    tracking-wider
-    whitespace-nowrap
-    bg-[var(--accent)]/5
-"
-                    >
-                      {trait}
-                    </motion.span>
-                  )
-                )}
+                {["UNDER DEVELOPMENT"].map((trait, index) => (
+                  <motion.span
+                    key={trait}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 + index * 0.1 }}
+                    className="inline-flex items-center
+                        px-5! py-2!
+                        border border-[var(--border)]
+                        rounded
+                        text-xs
+                        terminal-text
+                        text-[var(--accent)]
+                        uppercase
+                        tracking-wider
+                        whitespace-nowrap
+                        bg-[var(--accent)]/5"
+                  >
+                    {trait}
+                  </motion.span>
+                ))}
               </div>
             </motion.div>
           </div>

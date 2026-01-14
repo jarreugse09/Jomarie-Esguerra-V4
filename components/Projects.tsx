@@ -113,7 +113,7 @@ export default function Projects() {
       className="relative py-20 overflow-hidden bg-[var(--bg)]"
     >
       <div className="container max-w-[95vw] mx-auto px-4">
-        <div className="section-title mb-12 uppercase tracking-widest text-[var(--accent)] opacity-80">
+        <div className="section-title mb-12 uppercase tracking-widest text-[var(--accent)] opacity-100">
           Selected_Works
         </div>
         <div className="relative group/carousel">
