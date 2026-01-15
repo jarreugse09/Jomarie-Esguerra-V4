@@ -35,7 +35,7 @@ const projects: Project[] = [
   {
     id: 3,
     title: "Perps",
-    description: "AI-powered marketing copy tool.",
+    description: "Perpetual Help Molino Campus personal chatbot",
     techStack: ["Gemini AI", "Python", "Tailwind", "JavaScript", "HTML", "CSS"],
     imageUrl: "/project_img/perps_bot.png",
     githubUrl: "https://github.com/jarreugse09/Perpetual-Chatbot",
