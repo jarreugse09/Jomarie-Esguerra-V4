@@ -2,10 +2,19 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
+  const getNavTitle = () => {
+    if (pathname === "/projects") {
+      return "&gt; Jomarie/Projects";
+    }
+    return "&gt; Jomarie";
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-[var(--bg)]/90 backdrop-blur-md border-b border-[var(--border)]">
@@ -19,9 +28,8 @@ export default function Navbar() {
                          text-[var(--accent)]
                          hover:text-[var(--accent-bright)]
                          transition-colors"
-            >
-              &gt; Jomarie
-            </Link>
+              dangerouslySetInnerHTML={{ __html: getNavTitle() }}
+            />
           </div>
 
           {/* Desktop */}

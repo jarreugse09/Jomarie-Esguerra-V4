@@ -2,56 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  techStack: string[];
-  imageUrl: string;
-  githubUrl: string;
-  liveUrl: string;
-}
-
-const projects: Project[] = [
-  {
-    id: 1,
-    title: "Librag",
-    description: "Library Management System",
-    techStack: ["Node.js", "Express", "MongoDB", "JavaScript", "CSS3", "HTML5"],
-    imageUrl: "/project_img/library_management.png",
-    githubUrl: "https://github.com/jarreugse09/Library-Management",
-    liveUrl: "https://librag.vercel.app/",
-  },
-  {
-    id: 2,
-    title: "AI-SEE",
-    description: "Real-Time Hide-Face Detection",
-    techStack: ["Python", "Flask", "JavaScript", "HTML", "CSS", "YOLO"],
-    imageUrl: "/project_img/ai_see.png",
-    githubUrl: "https://github.com/jarreugse09/Bareface-Hideface-Detection",
-    liveUrl: "",
-  },
-  {
-    id: 3,
-    title: "Perps",
-    description: "Perpetual Help Molino Campus personal chatbot",
-    techStack: ["Gemini AI", "Python", "Tailwind", "JavaScript", "HTML", "CSS"],
-    imageUrl: "/project_img/perps_bot.png",
-    githubUrl: "https://github.com/jarreugse09/Perpetual-Chatbot",
-    liveUrl: "https://uphmc-chatbot.vercel.app",
-  },
-  {
-    id: 4,
-    title: "TUPasok",
-    description:
-      "QR-based visitor management system with database manipulation",
-    techStack: ["TypeScript", "Nodejs", "Express", "React", "Tailwind"],
-    imageUrl: "/project_img/tup_vms.png",
-    githubUrl: "https://github.com/jarreugse09/TUP-VMS-Frontend",
-    liveUrl: "https://tupasok.vercel.app/",
-  },
-];
+import { projects, type Project } from "@/data/projects";
 
 export default function Projects() {
   const containerRef = useRef<HTMLDivElement>(null);

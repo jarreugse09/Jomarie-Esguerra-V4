@@ -40,10 +40,7 @@ export default function Home() {
     {
       icon: <VscArchive />,
       label: "Projects",
-      onClick: () =>
-        document
-          .getElementById("projects")
-          ?.scrollIntoView({ behavior: "smooth", block: "start" }),
+      onClick: () => router.push("/projects"),
     },
   ];
 
