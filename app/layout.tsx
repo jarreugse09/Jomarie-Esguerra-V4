@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Jomarie Esguerra",
   icons: {
-    icon: "../public/joms.jpg",
+    icon: "/joms.jpg",
   },
 };
 
