@@ -3,13 +3,24 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import Shuffle from "./online-comp/Shuffle";
+import { useEffect, useState } from "react";
+import { HyperText } from "./online-comp/HyperText";
+import { TypingAnimation } from "./online-comp/TypingAnimation";
 
 const FaultyTerminal = dynamic(() => import("./online-comp/FaultyTerminal"), {
   ssr: false,
   loading: () => <div className="absolute inset-0 bg-black" />,
 });
 export default function Hero() {
+  const [asciiArt, setAsciiArt] = useState("");
+
+  useEffect(() => {
+    fetch("/ascii-art.txt")
+      .then((res) => res.text())
+      .then((text) => setAsciiArt(text))
+      .catch(() => setAsciiArt(""));
+  }, []);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center px-4 md:px-8 py-20 overflow-hidden bg-black">
       {/* --- BACKGROUND LAYER --- */}
@@ -28,14 +39,14 @@ export default function Hero() {
         <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.8)_100%)]" />
       </div>
 
-      <div className="container max-w-6xl relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div className="container max-w-10xl relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-left">
           {/* LEFT SIDE - Name + Title + CTA */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="space-y-6"
+            className="space-y-6  "
           >
             {/* Label */}
             <motion.div
@@ -45,37 +56,55 @@ export default function Hero() {
               className="terminal-text text-sm text-[var(--accent)] flex items-center gap-2"
             ></motion.div>
             {/* Main Name */}
-            <div>
-              <motion.h1 className="text-5xl md:text-6xl lg:text-9xl font-bold leading-[0.65] tracking-tighter mb-4">
-                <Shuffle
-                  text="Jomarie"
-                  shuffleTimes={3}
-                  shuffleDirection="down"
-                  ease="back.out(1.1)"
-                  loopDelay={2}
-                  // Pass the sizing classes here
-                  className="text-5xl md:text-6xl lg:text-9xl text-[var(--fg)]"
-                />
-                <br />
-                <Shuffle
-                  text="Esguerra"
-                  shuffleTimes={3}
-                  shuffleDirection="down"
-                  ease="back.out(1.1)"
-                  loopDelay={2}
-                  // Pass the sizing classes and glow here
-                  className=" text-5xl md:text-6xl lg:text-9xl text-[var(--accent)] glow-text"
-                />
+            <div className="overflow-visible">
+              <motion.h1 className="text-5xl md:text-6xl lg:text-9xl font-bold leading-[0.75] tracking-tighter mb-4 flex flex-wrap items-baseline gap-0">
+                <HyperText
+                  duration={900}
+                  delay={0}
+                  startOnView
+                  animateOnHover
+                  style={{ fontFamily: '"Unifont"' }}
+                  className="text-5xl md:text-6xl lg:text-9xl text-[var(--fg)] mb-1!"
+                >
+                  Jomarie
+                </HyperText>
+                <HyperText
+                  duration={900}
+                  delay={80}
+                  startOnView
+                  animateOnHover
+                  style={{ fontFamily: '"Unifont"' }}
+                  className="text-5xl md:text-6xl lg:text-9xl text-[var(--accent)]  mt-1! -ml-2"
+                >
+                  Esguerra
+                </HyperText>
               </motion.h1>
 
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
-                className="terminal-text text-lg md:text-xl text-[var(--accent)] mb-2"
+                className="terminal-text text-lg md:text-3xl text-[var(--accent)] mb-2 h-15"
               >
                 {" "}
-                <div className="h-4" /> &gt; Software Engineer
+                &gt;{" "}
+                <TypingAnimation
+                  words={[
+                    "Software Engineer",
+                    "Web Developer",
+                    "Frontend Developer",
+                    "Data Analyst",
+                    "AI Engineer",
+                  ]}
+                  typeSpeed={50}
+                  deleteSpeed={30}
+                  pauseDelay={2000}
+                  loop={true}
+                  showCursor={true}
+                  blinkCursor={true}
+                  cursorStyle="line"
+                  className="inline text-[var(--accent)]"
+                />
               </motion.div>
             </div>
             {/* Value Proposition */}
@@ -162,15 +191,38 @@ export default function Hero() {
               {/* CRT Bezel */}
               <div className="crt-bezel w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 p-4">
                 {/* CRT Screen */}
-                <div className="relative crt-screen overflow-hidden rounded-lg">
-                  {/* Image */}
-                  <Image
-                    src="/joms.jpg"
-                    alt="Jomarie Esguerra"
-                    fill
-                    priority
-                    className="object-cover crt-image"
-                  />
+                <div className="relative crt-screen overflow-hidden rounded-lg group">
+                  {/* Image wrapper */}
+                  <div className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-0">
+                    <Image
+                      src="/joms.jpg"
+                      alt="Jomarie Esguerra"
+                      fill
+                      priority
+                      className="object-cover crt-image"
+                    />
+                  </div>
+
+                  {/* ASCII overlay from public/ascii-art.txt */}
+                  <pre
+                    className="absolute inset-0 z-20 p-3 text-[4.6px] leading-[1.0] text-[var(--accent)] font-mono whitespace-pre-wrap bg-black/35 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    style={{ fontFamily: "Unifont, monospace" }}
+                  >
+                    {asciiArt || "Loading ASCII..."}
+                  </pre>
+
+                  {/* Status badge above ASCII */}
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.6 }}
+                    className="absolute left-3 bottom-3 z-30 bg-black/85 px-3! py-1! rounded-full border border-[var(--accent)] flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  >
+                    <span className="w-2 h-2 bg-[var(--accent)] rounded-full animate-pulse" />
+                    <span className="terminal-text text-[10px] text-[var(--accent)]">
+                      ONLINE
+                    </span>
+                  </motion.div>
 
                   {/* Scanlines */}
                   <div className="absolute inset-0 crt-scanlines pointer-events-none" />
@@ -189,19 +241,6 @@ export default function Hero() {
                   {/* CRT vignette */}
                   <div className="absolute inset-0 crt-vignette pointer-events-none" />
                 </div>
-
-                {/* Status */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 1 }}
-                  className="absolute -bottom-3 left-1/9 -translate-x-1/2 bg-black/80 px-4 py-1 rounded-full border border-[var(--accent)] flex items-center gap-2"
-                >
-                  <span className="ml-2! w-2 h-2 bg-[var(--accent)] rounded-full animate-pulse" />
-                  <span className="mx-2! my-2! terminal-text text-xs text-[var(--accent)]">
-                    ONLINE
-                  </span>
-                </motion.div>
               </div>
             </div>
           </motion.div>

@@ -29,7 +29,6 @@ export default function About() {
                   In a world saturated with digital noise, I strive to build
                   necessities.
                 </p>
-                <div className="h-6" />{" "}
                 {/* This acts as a blank physical line */}
                 {/* First Body Paragraph */}
                 <p className="text-[var(--fg-muted)] leading-relaxed text-lg mb-8">
@@ -37,7 +36,7 @@ export default function About() {
                   focused on creating digital solutions that bridge the gap
                   between human need and machine intelligence.
                 </p>
-                <div className="h-6" />{" "}
+
                 {/* This acts as a blank physical line */}
                 {/* Second Body Paragraph (The "One-Line" Gap is created by the mb-8 above) */}
                 <p className="text-[var(--fg-muted)] leading-relaxed text-lg mb-10">
@@ -47,7 +46,6 @@ export default function About() {
                   experiences while heavily involving myself in the world of AI
                   and Machine Learning to drive smarter automation.
                 </p>
-                <div className="h-6" />{" "}
               </div>
 
               <div className="pt-4 flex flex-wrap gap-2">
@@ -75,7 +73,7 @@ export default function About() {
                     >
                       {trait}
                     </motion.span>
-                  )
+                  ),
                 )}
               </div>
             </motion.div>
@@ -89,12 +87,10 @@ export default function About() {
               className="md:col-span-4 crt-card space-y-4"
             >
               <p className="text-[var(--fg)] font-semibold text-xl leading-snug">
-                Learn more about me!
-                <div className="h-2" /> (Personal Life)
+                Learn more about me! (Personal Life)
               </p>
 
               <p className="text-[var(--fg-muted)] leading-relaxed"></p>
-              <div className="h-2" />
               <div className="pt-4 flex flex-wrap gap-2">
                 {["UNDER DEVELOPMENT"].map((trait, index) => (
                   <motion.span
