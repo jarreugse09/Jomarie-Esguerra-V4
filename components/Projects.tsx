@@ -39,7 +39,7 @@ const projects: Project[] = [
     techStack: ["Gemini AI", "Python", "Tailwind", "JavaScript", "HTML", "CSS"],
     imageUrl: "/project_img/perps_bot.png",
     githubUrl: "https://github.com/jarreugse09/Perpetual-Chatbot",
-    liveUrl: "",
+    liveUrl: "https://uphmc-chatbot.vercel.app/chat",
   },
   {
     id: 4,
