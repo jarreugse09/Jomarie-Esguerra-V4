@@ -1,5 +1,13 @@
 import "./globals.css";
 import Navbar from "@/components/navbar";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Jomarie Esguerra",
+  icons: {
+    icon: "../public/joms.jpg",
+  },
+};
 
 export default function RootLayout({
   children,
