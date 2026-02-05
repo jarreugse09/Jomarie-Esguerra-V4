@@ -31,8 +31,6 @@ export default function ProjectsPage() {
         flickerChance={0.3}
         color="rgb(255, 255, 255)"
         maxOpacity={0.1}
-        width={typeof window !== "undefined" ? window.innerWidth : 1024}
-        height={typeof window !== "undefined" ? window.innerHeight : 768}
       />
 
       <div className="!container !max-w-7xl !relative !z-10 !w-full">

@@ -88,7 +88,7 @@ export const projects: Project[] = [
   },
   {
     id: 5,
-    title: "RMB Law Website",
+    title: "RMB Law",
     description:
       "Official company website showcasing legal services, brand identity, and contact information with integrated AI chatbot",
     overview:
@@ -100,14 +100,7 @@ export const projects: Project[] = [
       "Integrated AI chatbot (RMBot) powered by Google Generative AI for 24/7 client support.",
       "Seamless integration with Gmail for contact form submissions.",
     ],
-    techStack: [
-      "TypeScript",
-      "React",
-      "Next.js",
-      "Tailwind CSS",
-      "Framer Motion",
-      "Google Generative AI (Gemini)",
-    ],
+    techStack: ["TypeScript", "React", "Next.js", "Tailwind CSS", "Gemini AI"],
     imageUrl: "/project_img/rmb_law.png",
     githubUrl: "",
     liveUrl: "https://rmblawph.vercel.app/",
