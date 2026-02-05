@@ -76,8 +76,8 @@ const LinksIcon = ({ repo, live }: { repo?: string; live?: string }) => (
         href={repo}
         target="_blank"
         rel="noopener noreferrer"
-        whileHover={{ scale: 1.15, rotate: 5 }}
-        whileTap={{ scale: 0.9 }}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
         className="!flex-1 !text-[var(--accent)] !p-4 !rounded-lg !border !border-[var(--accent)]/50 hover:!border-[var(--accent)] hover:!bg-[var(--accent)]/10 !transition-all !duration-300 !flex !items-center !justify-center"
         title="GitHub Repository"
       >
@@ -89,8 +89,8 @@ const LinksIcon = ({ repo, live }: { repo?: string; live?: string }) => (
         href={live}
         target="_blank"
         rel="noopener noreferrer"
-        whileHover={{ scale: 1.15, rotate: -5 }}
-        whileTap={{ scale: 0.9 }}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
         className="!flex-1 !text-[var(--accent)] !p-4 !rounded-lg !border !border-[var(--accent)]/50 hover:!border-[var(--accent)] hover:!bg-[var(--accent)]/10 !transition-all !duration-300 !flex !items-center !justify-center"
         title="Live Demo"
       >

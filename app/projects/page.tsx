@@ -7,9 +7,19 @@ import { ProjectBentoCard } from "@/components/ProjectBentoCard";
 import { FlickeringGrid } from "@/components/online-comp/FlickeringGrid";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 export default function ProjectsPage() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const searchParams = useSearchParams();
+  const projectId = searchParams.get("id");
+
+  const initialIndex = projectId
+    ? projects.findIndex((p) => String(p.id) === projectId)
+    : 0;
+
+  const [currentIndex, setCurrentIndex] = useState(
+    initialIndex >= 0 ? initialIndex : 0,
+  );
 
   const currentProject = projects[currentIndex];
   const totalProjects = projects.length;

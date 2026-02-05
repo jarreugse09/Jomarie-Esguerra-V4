@@ -120,7 +120,7 @@ export default function Projects() {
               <motion.div
                 key={`${project.id}-${index}`}
                 whileHover={{ y: -10 }}
-                onClick={() => router.push("/projects")}
+                onClick={() => router.push(`/projects?id=${project.id}`)}
                 role="button"
                 tabIndex={0}
                 className="project-card w-[85vw] md:w-[400px] snap-center crt-card group flex flex-col h-[500px] overflow-hidden flex-shrink-0 !p-0 transition-all duration-300 hover:shadow-[0_0_30px_rgba(var(--accent-rgb),0.2)] cursor-pointer"
