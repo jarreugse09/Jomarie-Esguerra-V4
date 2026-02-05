@@ -6,6 +6,7 @@ import { projects } from "@/data/projects";
 import { ProjectBentoCard } from "@/components/ProjectBentoCard";
 import { FlickeringGrid } from "@/components/online-comp/FlickeringGrid";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import Link from "next/link";
 
 export default function ProjectsPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -23,6 +24,15 @@ export default function ProjectsPage() {
 
   return (
     <section className="!relative !min-h-screen !flex !items-center !justify-center !px-4 md:!px-8 !py-20 !overflow-hidden !bg-black">
+      {/* Back Button */}
+      <Link
+        href="/#projects"
+        className="!absolute !top-24 !left-4 md:!left-8 !z-20 !p-3 !rounded-lg !border !border-[var(--accent)] !text-[var(--accent)] hover:!bg-[var(--accent)]/10 !transition-all !duration-300 !flex !items-center !gap-2"
+      >
+        <FaChevronLeft className="!w-4 !h-4" />
+        <span className="!text-sm !font-mono">Back</span>
+      </Link>
+
       {/* FlickeringGrid Background */}
       <FlickeringGrid
         className="!absolute !inset-0"

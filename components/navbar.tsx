@@ -23,7 +23,7 @@ export default function Navbar() {
           {/* Logo */}
           <div className="flex items-center gap-4">
             <Link
-              href="/"
+              href={pathname === "/projects" ? "/#projects" : "/"}
               className="terminal-text font-bold text-xl md:text-2xl
                          text-[var(--accent)]
                          hover:text-[var(--accent-bright)]
