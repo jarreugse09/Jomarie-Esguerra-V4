@@ -1,10 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
-import { projects, type Project } from "@/data/projects";
+import { projects } from "@/data/projects";
+import { useRouter } from "next/navigation";
 
 export default function Projects() {
+  const router = useRouter();
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -114,14 +117,19 @@ export default function Projects() {
               <motion.div
                 key={`${project.id}-${index}`}
                 whileHover={{ y: -10 }}
-                className="project-card min-w-[85vw] md:min-w-[400px] snap-center crt-card group flex flex-col h-[450px] overflow-hidden flex-shrink-0 !p-0 transition-all duration-300 hover:shadow-[0_0_30px_rgba(var(--accent-rgb),0.2)]"
+                onClick={() => router.push("/projects")}
+                role="button"
+                tabIndex={0}
+                className="project-card min-w-[85vw] md:min-w-[400px] snap-center crt-card group flex flex-col h-[450px] overflow-hidden flex-shrink-0 !p-0 transition-all duration-300 hover:shadow-[0_0_30px_rgba(var(--accent-rgb),0.2)] cursor-pointer"
               >
                 {/* 1. IMAGE: Perfectly Flush */}
                 <div className="w-full h-[75%] overflow-hidden relative m-0 p-0">
-                  <img
+                  <Image
                     src={project.imageUrl}
                     className="w-full h-full object-cover block scale-110 group-hover:scale-100 transition-transform duration-700"
                     alt={project.title}
+                    fill
+                    sizes="(max-width: 768px) 85vw, 400px"
                   />
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
                 </div>
@@ -143,6 +151,7 @@ export default function Projects() {
                           href={project.githubUrl}
                           target="_blank"
                           rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
                           whileHover={{ scale: 1.1, rotate: 10 }}
                           whileTap={{ scale: 0.9 }}
                           className="mt-5! w-11 h-11 flex items-center justify-center rounded-full border border-[var(--border)] text-[var(--fg)] bg-[var(--bg)] hover:border-[var(--accent)] hover:text-[var(--accent)] transition-colors z-10"
@@ -168,6 +177,7 @@ export default function Projects() {
                             href={project.liveUrl}
                             target="_blank"
                             rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
                             whileHover={{ scale: 1.1, rotate: -10 }}
                             whileTap={{ scale: 0.9 }}
                             className="mt-5! w-11 h-11 flex items-center justify-center rounded-full bg-[var(--accent)] text-[var(--bg)] shadow-[0_0_15px_rgba(var(--accent-rgb),0.5)] z-10"

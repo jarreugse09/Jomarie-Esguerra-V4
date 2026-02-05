@@ -94,7 +94,6 @@ export default function Hero() {
                     "Web Developer",
                     "Frontend Developer",
                     "Data Analyst",
-                    "AI Engineer",
                   ]}
                   typeSpeed={50}
                   deleteSpeed={30}
