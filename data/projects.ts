@@ -87,25 +87,6 @@ export const projects: Project[] = [
     liveUrl: "https://tupasok.vercel.app/",
   },
   {
-    id: 4,
-    title: "RMB Law",
-    description:
-      "QR-based visitor management system with database manipulation",
-    overview:
-      "TUPVMS is a QR-based visitor management system designed to improve security and reduce long queues at campus entrances. Visitors register in advance and receive a QR code, which is scanned upon entry for fast and secure verification. The system replaces manual logbooks with a digital process, allowing authorized staff to monitor and manage visitor entries efficiently. TUPVMS helps create a safer, more organized entry experience and can be adapted for use in schools and other establishments.",
-    features: [
-      "Implemented a QR-based visitor management system for secure, pre-approved, and efficient campus entry.",
-      "Developed a full-stack MERN application for visitor registration, QR generation, and centralized data management.",
-      "Integrated QR scanning workflows to streamline entrance queueing and reduce manual verification.",
-      "Implemented role-based access control (RBAC) for administrators, security personnel, and staff.",
-      "Designed the system to be scalable and adaptable for schools and other establishments.",
-    ],
-    techStack: ["TypeScript", "Nodejs", "Express", "React", "Tailwind"],
-    imageUrl: "/project_img/tup_vms.png",
-    githubUrl: "https://github.com/jarreugse09/TUP-VMS-Frontend",
-    liveUrl: "https://tupasok.vercel.app/",
-  },
-  {
     id: 5,
     title: "RMB Law Website",
     description:
