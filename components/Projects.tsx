@@ -76,8 +76,8 @@ export default function Projects() {
         </div>
         <div className="relative group/carousel">
           {/* Edge Fades */}
-          <div className="absolute left-0 top-0 bottom-0 w-48 z-20 bg-gradient-to-r from-[var(--bg)] to-transparent pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-48 z-20 bg-gradient-to-l from-[var(--bg)] to-transparent pointer-events-none" />
+          {/* <div className="absolute left-0 top-0 bottom-0 w-48 z-20 bg-gradient-to-r from-[var(--bg)] to-transparent pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-48 z-20 bg-gradient-to-l from-[var(--bg)] to-transparent pointer-events-none" /> */}
 
           {/* Nav Buttons */}
           <button

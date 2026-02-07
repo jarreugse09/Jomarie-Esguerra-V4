@@ -10,7 +10,6 @@ import {
   SiExpress,
   SiMongodb,
   SiMysql,
-  SiDocker,
   SiGit,
   SiLinux,
   SiVercel,
@@ -45,13 +44,18 @@ const tools = [
   { name: "Render", icon: SiRender },
 ];
 
+// Define a type for skill items
+type SkillItem = {
+  name: string;
+  icon: React.ComponentType<{ className?: string }>;
+};
+
 // Skill card component
-function SkillCard({ item }: { item: { name: string; icon: any } }) {
+function SkillCard({ item }: { item: SkillItem }) {
   const Icon = item.icon;
   return (
     <div className="crt-skill-card mr-8 mb-4">
       <Icon className="crt-icon" />
-
       <span className="crt-skill-text">{item.name}</span>
     </div>
   );
@@ -63,7 +67,7 @@ function SeamlessMarquee({
   speed = 50,
   direction = "left",
 }: {
-  items: any[];
+  items: SkillItem[];
   speed?: number;
   direction?: "left" | "right";
 }) {
