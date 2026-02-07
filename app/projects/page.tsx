@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
+
 import { motion } from "motion/react";
 import { projects } from "@/data/projects";
 import { ProjectBentoCard } from "@/components/ProjectBentoCard";
@@ -9,7 +10,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
-export default function ProjectsPage() {
+function ProjectsPageContent() {
   const searchParams = useSearchParams();
   const projectId = searchParams.get("id");
 
@@ -119,5 +120,20 @@ export default function ProjectsPage() {
         </motion.div>
       </div>
     </section>
+  );
+}
+export default function ProjectPage() {
+  return (
+    <Suspense
+      fallback={
+        <section className="!relative !min-h-screen !flex !items-center !justify-center !px-4 md:!px-8 !overflow-hidden !bg-black">
+          <p className="!text-sm !uppercase !tracking-widest !text-[var(--accent)] !font-mono">
+            Loading Projects...
+          </p>
+        </section>
+      }
+    >
+      <ProjectsPageContent />
+    </Suspense>
   );
 }
